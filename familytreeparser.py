@@ -5,7 +5,7 @@
 This serves as a long usage message.
 """
 
-import getopt
+import argparse
 import random
 import re
 import sys
@@ -143,6 +143,19 @@ class Family:
 			if not h in p.households:
 				p.households.append(h)
 
+	def find_person(self, name):
+		"""Tries to find a person matching the 'name' argument.
+
+		"""
+		# First, search in ids
+		if name in self.everybody:
+			return self.everybody[name]
+		# Ancestor not found in 'id', maybe it's in the 'name' field?
+		for p in self.everybody.values():
+			if p.name == name:
+				return p
+		return None
+		
 	def populate(self, f):
 		"""Reads the input file line by line, to find persons and unions.
 
@@ -185,9 +198,9 @@ class Family:
 				return p
 
 	def next_generation(self, gen):
-		"""Takes the generation N in argument, returns the generation N+1
+		"""Takes the generation N in argument, returns the generation N+1.
 
-		Generations are represented as a list of persons
+		Generations are represented as a list of persons.
 
 		"""
 		next_gen = []
@@ -202,6 +215,9 @@ class Family:
 		return next_gen
 
 	def get_spouse(household, person):
+		"""Returns the spouse or husband of a person in a union.
+
+		"""
 		return	household.parents[0] == person \
 				and household.parents[1] or household.parents[0]
 
@@ -227,7 +243,9 @@ class Family:
 				prev = p.id
 				continue
 			elif len(p.households) > 2:
-				raise Exception('Not implemented')
+				raise Exception('Person "' + p.name + '" has more than 2 ' +
+								'spouses/husbands: drawing this is not ' +
+								'implemented')
 
 			# Display those on the left (if any)
 			for i in range(0, int(l/2)):
@@ -277,16 +295,11 @@ class Family:
 						if i == len(h.kids)/2:
 							i += 1
 
-	def output_descending_tree(self, name):
+	def output_descending_tree(self, ancestor):
 		"""Outputs the whole descending family tree from a given ancestor,
 		in DOT format.
 
 		"""
-		# Find the ancestor from whom the tree is built
-		if not name in self.everybody:
-			raise Exception('Cannot find person "' + name + '"')
-		ancestor = self.everybody[name]
-
 		# Find the first households
 		gen = [ancestor]
 
@@ -304,42 +317,38 @@ class Family:
 
 		print('}')
 
-	def parse(self, f):
-		"""Reads the input file and outputs the family tree graph description.
-
-		"""
-		self.populate(f)
-		#self.output()
-		ancestor = self.find_first_ancestor()
-		print('# Generating family tree using ancestor: %s' % ancestor.name)
-		self.output_descending_tree(ancestor.id)
-
-	def parse_from_file(self, filename):
-		f = open(filename, 'r', encoding='utf-8')
-		self.parse(f)
-		f.close()
-
 def main():
-	# parse command line options
-	try:
-		opts, args = getopt.getopt(sys.argv[1:], 'h', ['help'])
-	except getopt.GetoptError as err:
-		print(err)
-		print('for help use --help')
-		sys.exit(2)
-	# process options
-	for o, a in opts:
-		if o in ('-h', '--help'):
-			print(__doc__)
-			sys.exit(0)
-	# process arguments
-	if len(args) != 1:
-		print('usage: %s INPUTFILE' % sys.argv[0])
-		sys.exit(1)
-	inputfile = args[0]
+	"""Entry point of the program when called as a script.
 
+	"""
+	# Parse command line options
+	parser = argparse.ArgumentParser(description=
+			 'Generates a family tree graph from a simple text file')
+	parser.add_argument('-a', dest='ancestor',
+						help='make the family tree from an ancestor (if '+
+						'omitted, the program will try to find an ancestor)')
+	parser.add_argument('input', metavar='INPUTFILE',
+						help='the formatted text file representing the family')
+	args = parser.parse_args()
+
+	# Create the family
 	family = Family()
-	family.parse_from_file(inputfile)
+
+	# Populate the family
+	f = open(args.input, 'r', encoding='utf-8')
+	family.populate(f)
+	f.close()
+
+	# Find the ancestor from whom the tree is built
+	if args.ancestor:
+		ancestor = family.find_person(args.ancestor)
+		if not ancestor:
+			raise Exception('Cannot find person "' + args.ancestor + '"')
+	else:
+		ancestor = family.find_first_ancestor()
+
+	# Output the graph descriptor, in DOT format
+	family.output_descending_tree(ancestor)
 
 if __name__ == '__main__':
 	main()
