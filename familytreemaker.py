@@ -1,9 +1,33 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Copyright (C) 2013 Adrien Vergé
 
-"""Module docstring.
+"""familytreemaker
 
-This serves as a long usage message.
+This program creates family tree graphs from simple text files.
+
+The input file format is very simple, you describe persons of your family line
+by line, children just have to follow parents in the file. Persons can be
+repeated as long as they keep the same name or id. An example is given in the
+file LouisXIVfamily.txt.
+
+This script outputs a graph descriptor in DOT format. To make the image
+containing the graph, you will need a graph drawer such as GraphViz.
+
+For instance:
+
+$ ./familytreemaker.py -a 'Louis XIV' LouisXIVfamily.txt | \
+	dot -Tpng -o LouisXIVfamily.png
+
+will generate the tree from the infos in LouisXIVfamily.txt, starting from
+Louis XIV and saving the image in LouisXIVfamily.png.
+
 """
+
+__author__ = "Adrien Vergé"
+__copyright__ = "Copyright 2013, Adrien Vergé"
+__license__ = "GPL"
+__version__ = "1.0"
 
 import argparse
 import random
@@ -90,9 +114,9 @@ class Household:
 		self.id = 0
 	
 	def __str__(self):
-		return	'Famille:\n' + \
-				'\tparents = ' + ', '.join(map(str, self.parents)) + '\n' \
-				'\tenfants = ' + ', '.join(map(str, self.kids))
+		return	'Family:\n' + \
+				'\tparents  = ' + ', '.join(map(str, self.parents)) + '\n' \
+				'\tchildren = ' + ', '.join(map(str, self.kids))
 
 	def isempty(self):
 		if len(self.parents) == 0 and len(self.kids) == 0:
