@@ -30,4 +30,6 @@ $ ./familytreemaker.py -a 'Louis XIV' LouisXIVfamily.txt | dot -Tpng -o LouisXIV
 It will generate the tree from the infos in `LouisXIVfamily.txt`, starting from
 *Louis XIV* and saving the image in `LouisXIVfamily.png`.
 
-You can see the result here: [LouisXIVfamily.png](https://raw.github.com/adrienverge/familytreemaker/master/LouisXIVfamily.png).
+You can see the result:
+
+![result: LouisXIVfamily.png](/LouisXIVfamily.png)
