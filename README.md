@@ -25,9 +25,9 @@ Usage
 The sample family descriptor `LouisXIVfamily.txt` is here to show you the
 usage. Simply run:
 ```
-$ ./familytreemaker.py -a 'Louis XIV' LouisXIVfamily.txt | \
-	dot -Tpng -o LouisXIVfamily.png
+$ ./familytreemaker.py -a 'Louis XIV' LouisXIVfamily.txt | dot -Tpng -o LouisXIVfamily.png
 ```
 It will generate the tree from the infos in `LouisXIVfamily.txt`, starting from
-Louis XIV and saving the image in `LouisXIVfamily.png`.
+*Louis XIV* and saving the image in `LouisXIVfamily.png`.
 
+You can see the result here: [LouisXIVfamily.png](https://raw.github.com/adrienverge/familytreemaker/master/LouisXIVfamily.png).
