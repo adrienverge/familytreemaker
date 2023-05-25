@@ -6,7 +6,8 @@ generated_file = 'generated.txt'
 input_dir = 'input'
 # input test files are called i_n.txt
     # where n is number of test
-for input_file in Path.cwd().glob(f'{input_dir}{os.sep}i_*.txt'):
+input_files = sorted([i for i in Path.cwd().glob(f'{input_dir}{os.sep}i_*.txt')])
+for input_file in input_files:
     input_file = input_file.name    # get just filename and convert to str
     print(f'TestCase: {input_file}')
 
@@ -22,6 +23,6 @@ for input_file in Path.cwd().glob(f'{input_dir}{os.sep}i_*.txt'):
     if rv == 0:
         print('    OK\n')
     else:
-        print('    PROBLEM with TestCase: {input_file} !!!')
+        print(f'    PROBLEM with TestCase: {input_file} !!!')
         os.system(f'sdiff {generated_file} {expected_file}')
         print()     # just for new line
