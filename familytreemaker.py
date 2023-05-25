@@ -85,7 +85,7 @@ class Person:
 	def graphviz(self):
 		label = self.name
 		if 'surname' in self.attr:
-			label += '\\n« ' + str(self.attr['surname']) + '»'
+			label += '\\n«' + str(self.attr['surname']) + '»'
 		if 'birthday' in self.attr:
 			label += '\\n' + str(self.attr['birthday'])
 			if 'deathday' in self.attr:
