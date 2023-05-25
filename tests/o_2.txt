@@ -1,0 +1,14 @@
+digraph {
+	node [shape=box];
+	edge [dir=none];
+
+	Marko[label="test_1\n1710-02-15 † 1773-05-10",style=filled,fillcolor=bisque];
+	Maria[label="test_2\n« Test_Surname»\n1715-02-15 † 1774-05-10",style=filled,fillcolor=bisque];
+
+	{ rank=same;
+		Marko -> h0 -> Maria;
+		h0[shape=circle,label="",height=0.01,width=0.01];
+	}
+	{ rank=same;
+	}
+}

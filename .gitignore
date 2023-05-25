@@ -1,6 +1,10 @@
 
+# OSX temp files
+.DS_Store
+
 # output file of end to end tests
 tests/generated.txt
+tests/*.png
 
 # Visual Studio Code personal settings
 .vscode/launch.json
