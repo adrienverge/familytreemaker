@@ -1,0 +1,28 @@
+digraph {
+	node [shape=box];
+	edge [dir=none];
+
+	test1[label="test_1",style=filled,fillcolor=azure2];
+	test2[label="test_2",style=filled,fillcolor=bisque];
+	test_5[label="test_5",style=filled,fillcolor=azure2];
+	test3[label="test_3",style=filled,fillcolor=azure2];
+	test4[label="test_4",style=filled,fillcolor=bisque];
+	test_6[label="test_6",style=filled,fillcolor=bisque];
+
+	{ rank=same;
+		test1 -> h0 -> test2;
+		h0[shape=circle,label="",height=0.01,width=0.01];
+	}
+	{ rank=same;
+		h0_0;
+		h0_0[shape=circle,label="",height=0.01,width=0.01];
+	}
+		h0 -> h0_0;
+		h0_0 -> test_5;
+	{ rank=same;
+		test_5 -> h2 -> test_6;
+		h2[shape=circle,label="",height=0.01,width=0.01];
+	}
+	{ rank=same;
+	}
+}
