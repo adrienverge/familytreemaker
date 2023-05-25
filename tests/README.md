@@ -1,6 +1,6 @@
 # Problem is
 
-Not possible to have in houshold parents from bouth side.
+Not possible to have in household parents from both side.
 
 input/i_4.txt
 
