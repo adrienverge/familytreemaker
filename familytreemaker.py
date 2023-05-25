@@ -158,7 +158,9 @@ class Family:
 		"""
 		if len(h.parents) != 2:
 			print('error: number of parents != 2')
-			return
+			# if this is an error, program should stop not continue
+			# input file expect that there are 2 parents 
+			sys.exit(2)
 
 		h.id = len(self.households)
 		self.households.append(h)
