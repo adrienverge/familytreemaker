@@ -1,0 +1,14 @@
+# NOT POSSIBLE TO HAVE IN HOUSEHOLD PARENTS FROM BOTH SIDE
+# WANT TO FIX IT, NEED THIS FEATURE
+
+test_3 (M)
+test_4 (F)
+	test_6 (F, id=test_6)
+
+# THIS FAMILY LINE WILL BE IGNORED/OVERWRITTEN
+test_1 (M)
+test_2 (F)
+	test_5 (M, id=test_5)
+
+(id=test_5)
+(id=test_6)
