@@ -14,6 +14,8 @@ for input_file in Path.cwd().glob("i_*.txt"):
 
     os.system(f'python ../familytreemaker.py {input_file} > {generated_file}')
 
-    rv = os.system(f'diff {generated_file} {expected_file}')
+    rv = os.system(f'sdiff {generated_file} {expected_file}')
     if rv == 0:
         print('    OK\n')
+    else:
+        print('PROBLEM with TestCase: {input_file} !!!\n')
