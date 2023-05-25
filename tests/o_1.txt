@@ -1,0 +1,12 @@
+error: number of parents != 2
+digraph {
+	node [shape=box];
+	edge [dir=none];
+
+	LouisXV[label="test_1\n« Test_Surname»\n1710-02-15 † 1774-05-10",style=filled,fillcolor=azure2];
+
+	{ rank=same;
+	}
+	{ rank=same;
+	}
+}

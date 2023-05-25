@@ -1,4 +1,6 @@
 
+# output file of end to end tests
+tests/generated.txt
+
 # Python virtualenv
 venv*
-
